@@ -1,0 +1,169 @@
+/* Backdrop — dark overlay behind modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;                          /* covers full screen */
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Modal box */
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  padding: 1.5rem;
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.modal-eyebrow {
+  font-size: 0.75rem;
+  color: #e07b39;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.modal-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.modal-close {
+  background: #f5f5f5;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover { background: #eee; }
+
+/* Cut option buttons */
+.modal-cuts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.cut-option {
+  width: 100%;
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cut-option:hover {
+  border-color: #e07b39;
+  background: #fff8f3;
+}
+
+/* Highlighted selected cut */
+.cut-option--selected {
+  border-color: #e07b39;
+  background: #fff3ea;
+}
+
+.cut-option-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.cut-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.cut-grams {
+  font-size: 0.8rem;
+  color: #e07b39;
+  font-weight: 600;
+  background: #fff0e6;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+}
+
+.cut-desc {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+}
+
+/* Footer with price + add button */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.modal-price {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-price-label {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.modal-price-val {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.modal-add-btn {
+  background: #e07b39;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.modal-add-btn:hover { background: #c96a2a; }
