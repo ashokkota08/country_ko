@@ -24,6 +24,7 @@ function CutModal({ product, onClose, onAdd }) {
     const cut = cuts.find((c) => c.id === selectedCut);
     onAdd({
       ...product,
+      p_id: product.p_id || product.id,  // Ensure p_id exists
       cut: cut.label,
       weight: cut.grams ? `${cut.grams}g pieces` : "Whole",
     });

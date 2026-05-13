@@ -185,7 +185,7 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
                 {items.map((item, idx) => (
                   <div
                     key={item.p_id}
-                    className={`cart-item ${removingId === item.id ? "cart-item--removing" : ""}`}
+                    className={`cart-item ${removingId === item.p_id ? "cart-item--removing" : ""}`}
                     style={{ animationDelay: `${idx * 0.07}s` }}
                   >
                     <div className="cart-item-img-wrap">

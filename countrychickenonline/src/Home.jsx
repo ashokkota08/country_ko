@@ -9,6 +9,10 @@ function Home({ addToCart, cartCount }) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [modalProduct, setModalProduct] = useState(null);
  
+  const normalizeProduct = (product) => ({
+    ...product,
+    p_id: product.p_id ?? product.id,
+  });
 
   useEffect(() => {
     fetch("http://192.168.3.44:8081/All")
@@ -140,17 +144,21 @@ function Home({ addToCart, cartCount }) {
     <button
       className="add-btn"
       onClick={() => {
+        const normalized = normalizeProduct(p);
         if (p.name === "Chicken") {
-          setModalProduct(p);
+          setModalProduct(normalized);
         } else {
-          addToCart(p);
+          addToCart(normalized);
         }
       }}
     >
       + ADD
     </button>
-    <Link to="/cart" className="view-cart-btn"> {/* Changed from <a href> to <Link> for client-side navigation */}
+    <Link to="/cart" className="view-cart-btn">
       🛒 View Cart
+      {cartCount > 0 && (
+        <span className="view-cart-badge">{cartCount}</span>
+      )}
     </Link>
   </div>
   
