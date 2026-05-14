@@ -12,7 +12,7 @@ import com.example.model.Orders;
 import com.example.model.PaymentDTO;
 import com.example.service.OrderService;
 
-@CrossOrigin(origins="http://192.168.3.44:3000")
+@CrossOrigin(origins="${app.cors.allowed-origins}")
 @RestController
 public class OrderController {
 	@Autowired

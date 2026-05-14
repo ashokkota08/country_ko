@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 
-@CrossOrigin(origins = "http://192.168.3.44:3000")
+@CrossOrigin(origins = "${app.cors.allowed-origins}")
 @RestController
 public class ProductController {
 	@Autowired
