@@ -82,7 +82,7 @@ public class OrderService {
 		obj.put("razorpay_signature", payment.getRazorpay_signature());
 		
 		 try {
-			boolean isValid= Utils.verifyPaymentSignature(obj,"0vKWMWxjPB52VfCF5fXQtNZn");
+			boolean isValid= Utils.verifyPaymentSignature(obj,"${key_secret}");
 			if(isValid) {
 				return "Payment Verified !";
 			}
