@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +28,8 @@ public class OrderService {
 	ProductClient client;
 	@Autowired
 	RazorpayClient razorpayclient;
+	@Value("${key_secret}")
+	private String razorpaykeysecret;
 
 	public Orders getOrder(List<OrderDTO> orderitems) {
 	
@@ -82,7 +85,7 @@ public class OrderService {
 		obj.put("razorpay_signature", payment.getRazorpay_signature());
 		
 		 try {
-			boolean isValid= Utils.verifyPaymentSignature(obj,"${key_secret}");
+			boolean isValid= Utils.verifyPaymentSignature(obj,razorpaykeysecret);
 			if(isValid) {
 				return "Payment Verified !";
 			}
