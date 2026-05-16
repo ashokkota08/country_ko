@@ -32,7 +32,7 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
       .then(response => response.json())
       .then(data => {
         const options = {
-          key: "rzp_test_RyuXrxAmalMaEG",
+          key: process.env.REACT_APP_RAZORPAY_KEY_ID,
           amount: total * 100,
           currency: "INR",
           order_id: data.razorpayOrderId,
