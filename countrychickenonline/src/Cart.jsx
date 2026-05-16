@@ -24,7 +24,7 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
       quantity: i.qty
     }));
 
-    fetch("http://192.168.3.44:8082/order", {
+   fetch(`${process.env.REACT_APP_API_BASE_URL}/order`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(orderPayload)
@@ -55,7 +55,7 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
             }
           },
           handler: function(razorpayResponse) {  // Renamed to avoid confusion
-            fetch("http://192.168.3.44:8082/verfiyPayment", {
+           fetch(`${process.env.REACT_APP_API_BASE_URL}/verfiyPayment`, {
               method: "POST",
               headers: { "content-type": "application/json" },
               body: JSON.stringify({
@@ -190,7 +190,7 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
                   >
                     <div className="cart-item-img-wrap">
                       <img
-                        src={`http://192.168.3.44:8081/${item.img_path}`}
+                        src={`${process.env.REACT_APP_PRODUCT_SERVICE_URL}/${item.img_path}`}
                         alt={item.name}
                         className="cart-item-img"
                         onError={(e) => {

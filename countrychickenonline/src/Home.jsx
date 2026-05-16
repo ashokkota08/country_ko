@@ -15,7 +15,7 @@ function Home({ addToCart, cartCount }) {
   });
 
   useEffect(() => {
-    fetch("http://192.168.3.44:8081/All")
+    fetch(`${process.env.REACT_APP_PRODUCT_SERVICE_URL}/All`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error(err));
@@ -111,7 +111,7 @@ function Home({ addToCart, cartCount }) {
                   <span className="badge">Farm Fresh</span>
                   <button className="wishlist-btn" title="Save">♡</button>
                   <img
-                    src={`http://192.168.3.44:8081/${p.img_path}`}
+                    src={`${process.env.REACT_APP_PRODUCT_SERVICE_URL}/${p.img_path}`}
                     alt={p.name}
                     className="product-image"
                   />
