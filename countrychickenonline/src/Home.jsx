@@ -111,7 +111,7 @@ function Home({ addToCart, cartCount }) {
                   <span className="badge">Farm Fresh</span>
                   <button className="wishlist-btn" title="Save">♡</button>
                   <img
-                    src={`${process.env.REACT_APP_PRODUCT_SERVICE_URL}/${p.img_path}`}
+                    src={p.img_path}
                     alt={p.name}
                     className="product-image"
                   />

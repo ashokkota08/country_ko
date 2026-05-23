@@ -190,7 +190,7 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
                   >
                     <div className="cart-item-img-wrap">
                       <img
-                        src={`${process.env.REACT_APP_PRODUCT_SERVICE_URL}/${item.img_path}`}
+                        src={item.img_path}
                         alt={item.name}
                         className="cart-item-img"
                         onError={(e) => {
