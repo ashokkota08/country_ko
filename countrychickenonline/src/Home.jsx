@@ -145,7 +145,7 @@ function Home({ addToCart, cartCount }) {
       className="add-btn"
       onClick={() => {
         const normalized = normalizeProduct(p);
-        if (p.name === "Chicken") {
+        if (p.name?.toLowerCase() === "chicken") {
           setModalProduct(normalized);
         } else {
           addToCart(normalized);

@@ -3,7 +3,7 @@ import "./CutModal.css";
 
 // Cut options per product type
 const CUT_OPTIONS = {
-  Chicken: [
+  CHICKEN: [
     { id: "curry",    label: "Curry Cut",   grams: 30,  desc: "Small pieces, perfect for curries" },
     { id: "biryani",  label: "Biryani Cut", grams: 70,  desc: "Medium pieces, ideal for biryani" },
     { id: "boneless", label: "Boneless",    grams: 50,  desc: "No bones, cleaned & trimmed" },
