@@ -1,21 +1,37 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Home";
 import Cart from "./Cart";
 import OrderConfirmation from "./OrderConfirmation";
+import Auth from "./Auth";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [user, setUser] = useState(() => {
+    // Check if user is already logged in from a previous session
+    const username = localStorage.getItem("username");
+    const role = localStorage.getItem("role");
+    return username ? { username, role } : null;
+  });
+
+  const handleLogin = (username, role) => {
+    setUser({ username, role });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("role");
+    setUser(null);
+    setCartItems([]);
+  };
 
   const addToCart = (product) => {
-    // Ensure product has a valid p_id
     const productId = product.p_id || product.id;
-    
     if (!productId) {
       console.error("Product missing ID:", product);
       return;
     }
-    
     setCartItems((prev) => {
       const existing = prev.find((item) => (item.p_id || item.id) === productId);
       if (existing) {
@@ -48,17 +64,41 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home addToCart={addToCart} cartCount={cartCount} />} />
-        <Route path="/order-confirmation" element={<OrderConfirmation/>} />
-        <Route path="/cart" element={
-          <Cart
-            cartItems={cartItems}
-            updateQty={updateQty}
-            removeItem={removeItem}
-            cartCount={cartCount}
-            setCartItems={setCartItems}
-          />
-        } />
+        <Route
+          path="/"
+          element={
+            <Home
+              addToCart={addToCart}
+              cartCount={cartCount}
+              user={user}
+              onLogout={handleLogout}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            user ? <Navigate to="/" /> : <Auth onLogin={handleLogin} />
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            user ? (
+              <Cart
+                cartItems={cartItems}
+                updateQty={updateQty}
+                removeItem={removeItem}
+                cartCount={cartCount}
+                setCartItems={setCartItems}
+                user={user}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
       </Routes>
     </BrowserRouter>
   );

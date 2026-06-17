@@ -24,9 +24,12 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
       quantity: i.qty
     }));
 
-   fetch(`${process.env.REACT_APP_API_BASE_URL}/order`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
+   fetch(`${process.env.REACT_APP_API_BASE_URL}/order-service/order`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+  },
       body: JSON.stringify(orderPayload)
     })
       .then(response => response.json())
@@ -55,9 +58,12 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
             }
           },
           handler: function(razorpayResponse) {  // Renamed to avoid confusion
-           fetch(`${process.env.REACT_APP_API_BASE_URL}/verfiyPayment`, {
-              method: "POST",
-              headers: { "content-type": "application/json" },
+           fetch(`${process.env.REACT_APP_API_BASE_URL}/order-service/verfiyPayment`, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    },
               body: JSON.stringify({
                 razorpay_payment_id: razorpayResponse.razorpay_payment_id,
                 razorpay_order_id: razorpayResponse.razorpay_order_id,

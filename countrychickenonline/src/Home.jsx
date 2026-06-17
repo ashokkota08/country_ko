@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"; // Add this import for client-side navi
 import Navbar from "./Navbar";
 import CutModal from "./CutModal";
 
-function Home({ addToCart, cartCount }) {
+function Home({ addToCart, cartCount, user, onLogout }) {
   const [products, setProducts] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");
   const [modalProduct, setModalProduct] = useState(null);
@@ -25,7 +25,7 @@ function Home({ addToCart, cartCount }) {
 
   return (
     <>
-      <Navbar cartCount={cartCount} />
+<Navbar cartCount={cartCount} user={user} onLogout={onLogout} />
       <div className="home">
 
         {/* ── HERO ───────────────────────────────────── */}

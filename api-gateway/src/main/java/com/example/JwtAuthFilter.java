@@ -34,6 +34,10 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String path = exchange.getRequest().getURI().getPath();
 
+        // Allow OPTIONS preflight requests (CORS)
+        if (exchange.getRequest().getMethod().name().equals("OPTIONS")) {
+            return chain.filter(exchange);
+        }
         // Allow public URLs without token
         if (PUBLIC_URLS.stream().anyMatch(path::startsWith)) {
             return chain.filter(exchange);
@@ -60,7 +64,7 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
         }
 
         // Check ADMIN role for admin endpoints
-        String role = jwtUtil.extractUsername(token);
+        String role = jwtUtil.extractRole(token);
         if (ADMIN_URLS.stream().anyMatch(path::startsWith) && !role.equals("ADMIN")) {
             exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);
             return exchange.getResponse().setComplete();

@@ -31,11 +31,13 @@ public class JwtUtil {
                 .compact();
 	}
 	
-	//get username from token
 	public String extractUsername(String token) {
-		return getClaims(token).get("role", String.class);
+	    return getClaims(token).getSubject();  // ← was returning role, now returns subject
 	}
 	
+	public String extractRole(String token) {
+	    return getClaims(token).get("role", String.class);
+	}
 	 public boolean isTokenValid(String token) {
 	        try {
 	            return !getClaims(token).getExpiration().before(new Date());
