@@ -3,14 +3,16 @@ package com.example;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
+//@CrossOrigin(origins="${app.cors.allowed-origins}")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -22,6 +24,7 @@ public class AuthController {
 	public ResponseEntity<?> register(@RequestBody Map<String,String > request){
 		String username = request.get("username");
 		String password = request.get("password");
+		String mobile = request.get("mobile");
 		
 		 if (repository.findByUsername(username) != null) {
 	            return new ResponseEntity<>("user already exists",HttpStatus.BAD_REQUEST);
@@ -30,7 +33,8 @@ public class AuthController {
 		 user.setUsername(username);
 		 user.setPassword(password);
 		 user.setRole("CUSTOMER");
-		 repository.save(user);
+		 user.setMobile(mobile);
+		 ((CrudRepository<Users, Integer>) repository).save(user);
 		
 		return new ResponseEntity<>("User registered succefully!",HttpStatus.OK);
 	}

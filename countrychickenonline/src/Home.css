@@ -163,7 +163,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: px 5% 50px; /* reduced top padding */
+  padding: 30px 5% 50px;
   overflow: hidden;
   background:
     radial-gradient(ellipse 80% 60% at 50% 100%, rgba(232, 101, 26, 0.12) 0%, transparent 70%),

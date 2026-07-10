@@ -432,6 +432,152 @@
   }
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 4%;
+    min-height: 70px;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .nav-brand {
+    gap: 10px;
+  }
+
+  .nav-brand-name {
+    font-size: 1rem;
+  }
+
+  .nav-brand-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-announce {
+    font-size: 0.72rem;
+    padding: 8px 12px;
+  }
+
+  .nav-icon-btn,
+  .nav-hamburger,
+  .nav-cart-btn,
+  .nav-logout-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar {
+    padding: 0 3%;
+  }
+
+  .nav-drawer {
+    width: 100vw;
+  }
+
+  .nav-drawer-inner {
+    padding-top: 16px;
+  }
+
+  .nav-drawer-brand {
+    padding: 20px 20px 16px;
+  }
+
+  .nav-drawer-link {
+    font-size: 1rem;
+    padding: 14px 18px;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-cart-label {
+    display: none;
+  }
+
+  .nav-cart-btn {
+    padding: 9px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 4%;
+    height: auto;
+    min-height: 70px;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .nav-brand {
+    gap: 10px;
+  }
+
+  .nav-brand-name {
+    font-size: 1rem;
+  }
+
+  .nav-brand-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-announce {
+    font-size: 0.72rem;
+    padding: 8px 12px;
+  }
+
+  .nav-icon-btn,
+  .nav-hamburger,
+  .nav-cart-btn,
+  .nav-logout-btn {
+    
+    min-width: 5px;
+    min-height: 5px;
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar {
+    padding: 0 3%;
+  }
+
+  .nav-drawer {
+    width: 100vw;
+  }
+
+  .nav-drawer-inner {
+    padding-top: 16px;
+  }
+
+  .nav-drawer-brand {
+    padding: 20px 20px 16px;
+  }
+
+  .nav-drawer-link {
+    font-size: 1rem;
+    padding: 14px 18px;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-cart-label {
+    display: none;
+  }
+
+  .nav-cart-btn {
+    padding: 9px 12px;
+  }
+}
+
 @media (max-width: 480px) {
   .navbar {
     padding: 0 4%;
@@ -455,7 +601,7 @@
 .nav-user {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0px;
 }
 
 .nav-username {

@@ -14,11 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.model.Products;
 import com.example.service.ProductService;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
-
-//@CrossOrigin(origins = "${app.cors.allowed-origins}")
+//@CrossOrigin(origins="${app.cors.allowed-origins}")
 @RestController
 public class ProductController {
 	@Autowired

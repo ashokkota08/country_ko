@@ -16,9 +16,15 @@ function Home({ addToCart, cartCount, user, onLogout }) {
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_PRODUCT_SERVICE_URL}/All`)
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`Product fetch failed ${res.status}: ${text}`);
+        }
+        return res.json();
+      })
       .then((data) => setProducts(data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("Home product fetch error:", err));
   }, []);
 
   const filters = ["All", "Whole Chicken", "Curry Cut", "Boneless", "Liver & More"];
