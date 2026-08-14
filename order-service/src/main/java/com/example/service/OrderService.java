@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.exception.PaymentException;
+import com.example.exception.ProductNotFoundException;
 import com.example.feign.ProductClient;
 import com.example.model.OrderDTO;
 import com.example.model.Orders;
@@ -18,6 +20,8 @@ import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import com.razorpay.Utils;
+
+import feign.FeignException;
 @Service
 public class OrderService {
 	@Autowired
@@ -38,10 +42,19 @@ public class OrderService {
 		
 		//String URL = "http://localhost:8080/order/"+order.getId();
 		//ProductResponseDTO response =restTemplate.getForObject(URL, ProductResponseDTO.class);
-		
+		ProductResponseDTO response ;
 		for(OrderDTO items:orderitems) {
-			ProductResponseDTO response = client.getProduct(items.getId());
-			 total_amount += response.getPrice()*items.getQuantity();
+			try {
+				response = client.getProduct(items.getId());
+				if(response == null) {
+					throw new ProductNotFoundException("Product not found with id:"+items.getId());
+				}
+			}catch(FeignException.NotFound e) {
+				throw new ProductNotFoundException("Product not found with id:"+items.getId());
+			}
+			
+			total_amount += response.getPrice()*items.getQuantity();
+			 
 			
 		}
 		//ProductResponseDTO response = client.getProduct(order.getId());
@@ -73,7 +86,7 @@ public class OrderService {
 			
 			return razorpayclient.orders.create(options);
 		}catch(Exception e) {
-			throw new RuntimeException("Razorpay order creation failed");
+			throw new PaymentException("Razorpay order creation failed");
 		}
 	}
 
@@ -94,9 +107,9 @@ public class OrderService {
 			}
 		} catch (RazorpayException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new PaymentException("Payment verification failed",e);
 		}
-		return null;
+		
 	}
 	
 }
