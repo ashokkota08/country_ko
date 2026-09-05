@@ -52,9 +52,11 @@ function Cart({ cartItems, updateQty, removeItem, cartCount }) {
               blocks: {
                 upi: {
                   name: "Pay with UPI",
-                  instruments: [{ method: "upi" }]
+                  instruments: [{ method: "upi", flows: ["collect", "qr", "intent"] }]
                 }
-              }
+              },
+              sequence: ["block.upi", "block.card", "block.netbanking", "block.wallet"],
+              preferences: { show_default_blocks: true }
             }
           },
           handler: function(razorpayResponse) {  // Renamed to avoid confusion

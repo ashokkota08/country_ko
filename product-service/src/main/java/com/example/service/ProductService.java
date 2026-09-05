@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.example.exception.ImageUploadException;
+import com.example.exception.ProductNotFoundException;
 import com.example.model.Products;
 import com.example.repository.ProductRepository;
 
@@ -26,19 +28,21 @@ public class ProductService {
 	Cloudinary cloudinary;
 	
 	
-	public Products save(Products product,MultipartFile image) throws IOException {
-	
-	Map uploadresult =	cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
-		
+	public Products save(Products product,MultipartFile image){
+		Map uploadresult;
+	try {
+	uploadresult =	cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+	}catch(Exception e) {
+		throw new ImageUploadException("Error in uploading image: ",e);
+	}
 	String imageUrl =	(String) uploadresult.get("secure_url");
 		
 	product.setImg_path(imageUrl);
-		
 		return repo.save(product);
 	}
 	public Products findProduct(int id) {
 	
-		return repo.findById(id).orElse(null);
+		return repo.findById(id).orElseThrow(()-> new ProductNotFoundException(id));
 	}
 	public List<Products> findAll() {
 	
