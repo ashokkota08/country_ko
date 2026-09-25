@@ -47,7 +47,7 @@ public class OrderService {
 			try {
 				response = client.getProduct(items.getId());
 				if(response == null) {
-					throw new ProductNotFoundException("Product not found with id:"+items.getId());
+					throw new ProductNotFoundException("Product not found id:"+items.getId());
 				}
 			}catch(FeignException.NotFound e) {
 				throw new ProductNotFoundException("Product not found with id:"+items.getId());
